@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class Produto<T extends UnidadeProporcional> implements Comparable<Produto<T>> {
 
-    private BigDecimal valorUnitario;
+    private BigDecimal preco;
     private int quantidade;
     private T unidade;
     
@@ -21,36 +21,30 @@ public class Produto<T extends UnidadeProporcional> implements Comparable<Produt
         if (unidade == null) {
             throw new IllegalArgumentException("Informe a unidade!");
         }
-        this.valorUnitario = preco;
+        this.preco = preco;
         this.quantidade = quantidade;
         this.unidade = unidade;
     }
     
-    public BigDecimal getValorUnitario() {
-        return valorUnitario;
+    public BigDecimal getPreco() {
+        return preco;
     }
     
-    public BigDecimal getValorUnitarioUnidadeBase() {
-        return valorUnitario.divide(new BigDecimal(unidade.proporcao()));
+    /**
+     * Retorna o preço na unidade básica para possibilitar a comparação em unidades diferentes.
+     * Por exemplo, se a unidade for kg, o "preço base" será dividido por 1000, ou seja, o valor em gramas do produto.
+     * Além disso, o resultado também será dividido pela quantidade, de forma que o resultado seja o valor por grama. 
+     */
+    public BigDecimal getPrecoBase() {
+        return preco.divide(new BigDecimal(unidade.proporcao())).divide(new BigDecimal(quantidade));
     }
     
     public int getQuantidade() {
         return quantidade;
     }
     
-    /**
-     * @return Retorna a quantidade na unidade base
-     */
-    public int getQuantidadeUnidadeBase() {
-        return quantidade * unidade.proporcao();
-    }
-    
     public T getUnidade() {
         return unidade;
-    }
-    
-    public BigDecimal getValorTotal() {
-        return valorUnitario.multiply(new BigDecimal(quantidade));
     }
     
     @Override
@@ -58,7 +52,7 @@ public class Produto<T extends UnidadeProporcional> implements Comparable<Produt
         if (o == null) {
             throw new IllegalArgumentException("Objeto nulo!");
         }
-        return this.getValorTotal().compareTo(o.getValorTotal());
+        return this.getPrecoBase().compareTo(o.getPrecoBase());
     }
     
 }
