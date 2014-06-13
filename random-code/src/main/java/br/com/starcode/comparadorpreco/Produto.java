@@ -13,7 +13,7 @@ public class Produto<T extends UnidadeProporcional> implements Comparable<Produt
     
     public Produto(BigDecimal preco, int quantidade, T unidade) {
         if (preco == null) {
-            throw new IllegalArgumentException("Pre�o nulo!");
+            throw new IllegalArgumentException("Preço nulo!");
         }
         if (quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser um inteiro positivo!");
