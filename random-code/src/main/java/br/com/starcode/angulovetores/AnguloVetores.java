@@ -1,4 +1,4 @@
-package br.com.starcode.comparadordata.angulovetores;
+package br.com.starcode.angulovetores;
 
 
 /**
