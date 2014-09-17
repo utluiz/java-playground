@@ -43,14 +43,14 @@ public class ComparatorExample {
 		});
 		imprime(clientes);
 			
+	}
+	
+	private static void imprime(Cliente[] clientes) {
+		for (Cliente cliente : clientes) {
+			System.out.print(cliente.getNome());
+			System.out.print("(" + cliente.getIdade() + "),");
 		}
-		
-		private static void imprime(Cliente[] clientes) {
-			for (Cliente cliente : clientes) {
-				System.out.print(cliente.getNome());
-				System.out.print("(" + cliente.getIdade() + "),");
-			}
-			System.out.println();
-		}
+		System.out.println();
+	}
 	
 }
